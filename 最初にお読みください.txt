@@ -1,0 +1,26 @@
+ミラン研究所 夏休み探究ノート PWA 完成版
+
+【GitHubへアップロードするもの】
+このZIPを解凍し、「miran-lab-pwa-complete」フォルダを開いてください。
+その中にある次のファイル・フォルダを、すべてGitHubへアップロードします。
+
+index.html
+app.js
+styles.css
+manifest.webmanifest
+sw.js
+icons フォルダ
+設置説明書.pdf
+最初にお読みください.txt
+
+【GitHub画面での操作】
+1. 空の miran-lab-pwa リポジトリを開く
+2. 青い案内欄の「既存のファイルをアップロード」をクリック
+3. このフォルダの中身をすべて選択して、点線枠へドラッグ＆ドロップ
+4. 画面下の「Commit changes」をクリック
+
+注意：ZIPファイル自体はアップロードしません。
+注意：外側のフォルダだけをアップロードせず、フォルダ内の index.html などがGitHubの最上段に並ぶようにしてください。
+
+【公開後】
+Cloudflare PagesにGitHubリポジトリを接続すると、HTTPSのURLでPWAとして公開できます。
