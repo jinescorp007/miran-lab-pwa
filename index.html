@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0f766e">
-  <meta name="description" content="ミラン研究所 夏休み宿題ダッシュボード">
+  <meta name="description" content="ミラン研究所 1・2年生の復習を中心にした夏休み学習アプリ">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="styles.css">
-  <title>ミラン研究所｜夏休み宿題ダッシュボード</title>
+  <title>ミラン研究所｜夏休み研究所</title>
 </head>
 <body>
 <header class="app-header">
@@ -18,8 +18,13 @@
 <main>
 <section id="home" class="page active">
   <div class="hero card">
-    <div><p id="todayLabel" class="muted"></p><h2>おはよう、ミラン研究員！</h2><p>少しずつで大丈夫。挑戦したことにポイントが入ります。</p></div>
+    <div><p id="todayLabel" class="muted"></p><h2>おはよう、ミラン研究員！</h2><p>まずは1・2年生の復習から。できる問題を少しずつ増やそう。</p></div>
     <div class="level-box"><span>研究ポイント</span><strong id="pointsTotal">0</strong><small id="badgeName">はじめの一歩</small></div>
+  </div>
+
+  <div class="review-first card">
+    <div><span class="priority-badge">いちばん大切</span><h3>1・2年生の復習</h3><p>国語と算数を5問だけ。むずかしい3年生の問題に急がなくても大丈夫です。</p></div>
+    <button class="primary" data-open-page="review">今日の復習を始める</button>
   </div>
 
   <div class="progress-card card">
@@ -41,12 +46,26 @@
 
 <section id="homework" class="page">
   <div class="section-title-row"><h2>学校の宿題</h2><span class="pill">芝浦小学校</span></div>
-  <p class="muted">進み具合を10%ずつ増やせます。全部終わった宿題は「完了」にしてください。</p>
+  <div class="notice card"><strong>今は、簡単に取り組める宿題からで大丈夫です。</strong><p>一行日記・歯みがき・リコーダー・観察などを進めながら、学習は1・2年生の復習を中心にします。</p></div>
   <div id="homeworkList" class="homework-list"></div>
 </section>
 
+<section id="review" class="page">
+  <div class="section-title-row"><h2>たしかめ・復習教室</h2><span class="pill">1・2年生中心</span></div>
+  <div class="card">
+    <p><strong>学校の正式な「たしかめテスト」そのものではなく、取りかかる前のやさしい復習問題です。</strong></p>
+    <div class="review-controls">
+      <label>学年<select id="reviewGrade"><option value="1">1年生</option><option value="2">2年生</option><option value="mix">1・2年生まぜる</option><option value="3easy">3年生おためし</option></select></label>
+      <label>教科<select id="reviewSubject"><option value="mix">国語・算数</option><option value="japanese">国語</option><option value="math">算数</option></select></label>
+    </div>
+    <button id="startReview" class="primary full">5問の復習を始める</button>
+  </div>
+  <div id="reviewQuiz" class="card hidden"></div>
+  <div id="reviewHistory" class="card"></div>
+</section>
+
 <section id="kanji" class="page">
-  <div class="section-title-row"><h2>漢字研究室</h2><span class="pill">今日の5文字</span></div>
+  <div class="section-title-row"><h2>漢字研究室</h2><span class="pill">やさしい5文字</span></div>
   <div class="card">
     <div id="kanjiList" class="kanji-grid"></div>
     <label>練習メモ<textarea id="kanjiMemo" rows="4" placeholder="読めた漢字、むずかしかった漢字"></textarea></label>
@@ -55,7 +74,7 @@
 </section>
 
 <section id="math" class="page">
-  <div class="section-title-row"><h2>計算研究室</h2><span class="pill">3問チャレンジ</span></div>
+  <div class="section-title-row"><h2>計算研究室</h2><span class="pill">1・2年生の計算</span></div>
   <div class="card">
     <div id="quizArea" class="quiz-area"></div>
     <div class="button-row"><button id="newQuiz" class="ghost">問題をかえる</button><button id="checkQuiz" class="primary">答えあわせ</button></div>
@@ -77,15 +96,7 @@
 <section id="report" class="page">
   <div class="section-title-row"><h2>記録とバックアップ</h2><span class="pill">家族と確認</span></div>
   <div id="statsGrid" class="card stats-grid"></div>
-  <div class="card">
-    <h3>データを守る</h3>
-    <p class="muted">更新前や機種変更前にバックアップを書き出してください。</p>
-    <div class="button-row wrap">
-      <button id="exportData" class="ghost">バックアップを書き出す</button>
-      <label class="file-button">バックアップを読み込む<input id="importData" type="file" accept="application/json"></label>
-      <button id="printReport" class="primary">印刷・PDF保存</button>
-    </div>
-  </div>
+  <div class="card"><h3>データを守る</h3><p class="muted">更新前や機種変更前にバックアップを書き出してください。</p><div class="button-row wrap"><button id="exportData" class="ghost">バックアップを書き出す</button><label class="file-button">バックアップを読み込む<input id="importData" type="file" accept="application/json"></label><button id="printReport" class="primary">印刷・PDF保存</button></div></div>
   <div class="card"><h3>一行日記</h3><div id="diaryEntries" class="entry-list"></div></div>
 </section>
 </main>
@@ -93,6 +104,7 @@
 <nav class="bottom-nav">
   <button data-page="home" class="active"><span>🏠</span>ホーム</button>
   <button data-page="homework"><span>📋</span>宿題</button>
+  <button data-page="review"><span>✅</span>復習</button>
   <button data-page="kanji"><span>漢</span>漢字</button>
   <button data-page="math"><span>➕</span>計算</button>
   <button data-page="explore"><span>🔎</span>観察</button>
